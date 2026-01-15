@@ -57,7 +57,6 @@
             }
           </style>
           <tr align="center">
-            <td>no</td>
             <td>Celcius</td>
             <td>Fahrenheit</td>
             <td>Reamure</td>
@@ -66,7 +65,6 @@
         </thead>
         <tbody align="center">
           <tr>
-            <td>1</td>
             <td id="celciusResult"></td>
             <td id="fahrenheitResult"></td>
             <td id="reamureResult"></td>
@@ -84,6 +82,10 @@
       const fahrenheit = document.getElementById("fahrenheitResult");
       const reamure = document.getElementById("reamureResult");
       const kelvin = document.getElementById("kelvinResult");
+      const tbody = document.querySelector("tbody");
+      const counterId = document.getElementById("counterId");
+      console.log(counterId);
+      
 
       const calc = (e) => {
         event.preventDefault();
@@ -99,6 +101,41 @@
         fahrenheit.textContent = (firstValCelcius * 9) / 5 + 32;
         reamure.textContent = firstValCelcius * (4 / 5);
         kelvin.textContent = firstValCelcius + 273;
+
+        let templates = "";
+
+        const newRow = document.createElement("tr")
+        tbody.appendChild(newRow);
+        
+        const tdCounter = document.createElement("td");
+        const tdCelcius = document.createElement("td");
+        const tdFahrenheit = document.createElement("td");
+        const tdReamure = document.createElement("td");
+        const tdKelvin = document.createElement("td");
+
+        tdCounter.textContent = firstValCelcius;
+        tdCelcius.textContent = firstValCelcius;
+        tdFahrenheit.textContent = (firstValCelcius * 9) / 5 
+        tdReamure.textContent = firstValCelcius * (4 / 5);
+        tdKelvin.textContent = firstValCelcius + 273;
+
+        let counterId = 1
+
+        
+        newRow.appendChild(tdCelcius);
+        newRow.appendChild(tdFahrenheit);
+        newRow.appendChild(tdReamure);
+        newRow.appendChild(tdKelvin);
+        templates += `
+            <tr>
+                <td>${tdCounter}</td>
+                <td>${tdCelcius}</td>
+                <td>${tdFahrenheit}</td>
+                <td>${tdReamure}</td>
+                <td>${tdKelvin}</td>
+            </tr>
+        `;
+
       };
 
       form.addEventListener("submit", calc);

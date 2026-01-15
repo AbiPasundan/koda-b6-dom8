@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konversi Suhu</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* text-align: center; */
+        width: 80vw;
+        height: 100vh;
+        background-color: coral;
+        margin: auto;
+      }
+
+      .container input[type="text"] {
+        border: none;
+        text-align: center;
+        width: 100px;
+      }
+
+      .container table {
+        background-color: antiquewhite;
+      }
+      table {
+        margin-block: 100px;
+      }
+      thead tr {
+        display: flex;
+        gap: 30px;
+      }
+      tbody tr {
+        display: flex;
+        gap: 30px;
+      }
+      td {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form class="input">
+        <input type="text" id="input" />
+        <button type="submit">Submit</button>
+      </form>
+      <table>
+        <thead>
+            <style>
+                td {
+                    border-right: 1px solid red;
+                    border-bottom: 1px solid red;
+                }
+            </style>
+          <tr align="center">
+            <td>no</td>
+            <td>Celcius</td>
+            <td>Fahrenheit</td>
+            <td>Reamure</td>
+            <td>Kelvin</td>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <tr>
+            <td>1</td>
+            <td id="celciusResult"></td>
+            <td id="fahrenheitResult"></td>
+            <td id="reamureResult"></td>
+            <td id="kelvinResult"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const input = document.getElementById("input");
+      const celcius = document.getElementById("celciusResult");
+      const fahrenheit = document.getElementById("fahrenheitResult");
+      const reamure = document.getElementById("reamureResult");
+      const kelvin = document.getElementById("kelvinResult");
+
+      input.addEventListener("input", (e) => {
+        // e.preventDefault();
+        let firstValCelcius = e.target.value;
+        console.log(firstValCelcius);
+
+        celcius.textContent = firstValCelcius;
+
+        let fahrenheitResulst = (firstValCelcius * 9) / 5 + 32;
+        Math.floor(fahrenheitResulst)
+        console.log(fahrenheitResulst);
+        // if (typeof firstValCelcius === "string") {
+        //   fahrenheit.textContent = "salah monyet";
+        // } else {
+          fahrenheit.textContent = fahrenheitResulst;
+        // }
+        // R = (4/5)C or R = 0.8 × C
+        let reamureResulst = (4 / 5) * firstValCelcius;
+        Math.floor(Number(fahrenheitResulst))
+        // if (typeof firstValCelcius === "string") {
+        //   reamure.textContent = "salah monyet";
+        // } else {
+          reamure.textContent = reamureResulst;
+        // }
+
+        let kelvinResulst = firstValCelcius + 273;
+        parseFloat(kelvinResulst)
+        kelvin.textContent = kelvinResulst;
+      });
+    </script>
+  </body>
+</html>

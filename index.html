@@ -71,6 +71,12 @@
       const tbody = document.querySelector("tbody");
       const result = document.getElementById("result");
 
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("p").hide();
+        });
+      });
+
       const celcius = document.getElementById("celciusResult");
       const fahrenheit = document.getElementById("fahrenheitResult");
       const reamure = document.getElementById("reamureResult");
@@ -105,32 +111,61 @@
 
       loadData();
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const celciusValue = Math.floor(input.value);
-        const fahrenheitValue = Math.floor((celciusValue * 9) / 5 + 32);
-        const reamureValue = Math.floor(celciusValue * (4 / 5));
-        const kelvinValue = Math.floor(celciusValue + 273);
+      $(document).ready(function () {
+        $("#form").submit(function () {
+          // e.preventDefault();
+          const celciusValue = Math.floor(input.value);
+          const fahrenheitValue = Math.floor((celciusValue * 9) / 5 + 32);
+          const reamureValue = Math.floor(celciusValue * (4 / 5));
+          const kelvinValue = Math.floor(celciusValue + 273);
 
-        if (typeof celciusValue != "number") {
-          console.log("baleg njing");
-          return;
-        }
+          if (typeof celciusValue != "number") {
+            console.log("baleg njing");
+            return;
+          }
 
-        const result = {
-          celcius: celciusValue,
-          fahrenheit: fahrenheitValue,
-          reamure: reamureValue,
-          kelvin: kelvinValue,
-        };
+          const result = {
+            celcius: celciusValue,
+            fahrenheit: fahrenheitValue,
+            reamure: reamureValue,
+            kelvin: kelvinValue,
+          };
 
-        const data = JSON.parse(localStorage.getItem("key")) || [];
-        data.push(result);
-        localStorage.setItem("key", JSON.stringify(data));
-        itemPlus(celciusValue, fahrenheitValue, reamureValue, kelvinValue);
+          const data = JSON.parse(localStorage.getItem("key")) || [];
+          data.push(result);
+          localStorage.setItem("key", JSON.stringify(data));
+          itemPlus(celciusValue, fahrenheitValue, reamureValue, kelvinValue);
 
-        input.value = "";
+          input.value = "";
+        });
       });
+
+      // form.addEventListener("submit", (e) => {
+      //   e.preventDefault();
+      //   const celciusValue = Math.floor(input.value);
+      //   const fahrenheitValue = Math.floor((celciusValue * 9) / 5 + 32);
+      //   const reamureValue = Math.floor(celciusValue * (4 / 5));
+      //   const kelvinValue = Math.floor(celciusValue + 273);
+
+      //   if (typeof celciusValue != "number") {
+      //     console.log("baleg njing");
+      //     return;
+      //   }
+
+      //   const result = {
+      //     celcius: celciusValue,
+      //     fahrenheit: fahrenheitValue,
+      //     reamure: reamureValue,
+      //     kelvin: kelvinValue,
+      //   };
+
+      //   const data = JSON.parse(localStorage.getItem("key")) || [];
+      //   data.push(result);
+      //   localStorage.setItem("key", JSON.stringify(data));
+      //   itemPlus(celciusValue, fahrenheitValue, reamureValue, kelvinValue);
+
+      //   input.value = "";
+      // });
 
       itemPlus();
     </script>

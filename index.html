@@ -59,8 +59,7 @@
             <td>Kelvin</td>
           </tr>
         </thead>
-        <tbody align="center" id="result">
-        </tbody>
+        <tbody align="center" id="result"></tbody>
       </table>
     </div>
 
@@ -76,45 +75,56 @@
       const reamure = document.getElementById("reamureResult");
       const kelvin = document.getElementById("kelvinResult");
 
-      let data = []
-      window.localStorage.setItem("key", JSON.stringify(data))
-      const res = localStorage.getItem("key")
-      console.log(res);
+      let data = [];
+      // window.localStorage.setItem("key", JSON.stringify(data))
+      // const res = localStorage.getItem("key")
+      // console.log(res);
 
-      form.addEventListener("submit", e => {
-        e.preventDefault()
-        const celciusValue = input.value
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const celciusValue = input.value;
 
         const fahrenheitValue = Math.floor((celciusValue * 9) / 5 + 32);
-        const reamureValue = Math.floor(celciusValue * (4 / 5))
-        const kelvinValue = Math.floor(celciusValue + 273)
+        const reamureValue = Math.floor(celciusValue * (4 / 5));
+        const kelvinValue = Math.floor(celciusValue + 273);
 
-        const contentBody = document.createElement("tr")
-        result.appendChild(contentBody)
+        const contentBody = document.createElement("tr");
+        result.appendChild(contentBody);
 
-        const celciusTd = document.createElement("td")
-        const fahrenheitTd = document.createElement("td")
-        const reamureTd = document.createElement("td")
-        const kelvinTd = document.createElement("td")
+        const celciusTd = document.createElement("td");
+        const fahrenheitTd = document.createElement("td");
+        const reamureTd = document.createElement("td");
+        const kelvinTd = document.createElement("td");
 
-        celciusTd.textContent = celciusValue
-        fahrenheitTd.textContent = fahrenheitValue
-        reamureTd.textContent = reamureValue
-        kelvinTd.textContent = kelvinValue
-        contentBody.appendChild(celciusTd)
-        contentBody.appendChild(fahrenheitTd)
-        contentBody.appendChild(reamureTd)
-        contentBody.appendChild(kelvinTd)
+        const hasil = [
+          {
+            celciusValue,
+            fahrenheit: fahrenheitValue,
+            reamure: reamureValue,
+            kelvin: kelvinValue,
+          },
+        ];
+        window.localStorage.setItem("key", JSON.stringify(hasil));
 
-        
+        // console.log(hasil);
+        // console.log(hasil.celciusValue);
+        // console.log(hasil.fahrenheit);
+        // console.log(hasil.reamure);
+        // console.log(hasil.kelvin);
+
+        celciusTd.textContent = hasil.celciusValue;
+        fahrenheitTd.textContent = fahrenheitValue;
+        reamureTd.textContent = reamureValue;
+        kelvinTd.textContent = kelvinValue;
+        contentBody.appendChild(celciusTd);
+        contentBody.appendChild(fahrenheitTd);
+        contentBody.appendChild(reamureTd);
+        contentBody.appendChild(kelvinTd);
+
         // console.log(fahrenheitValue);
         // console.log(reamureValue);
         // console.log(kelvinValue);
-        
-      })
-      
-      
-
+      });
     </script>
   </body>
 </html>

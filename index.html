@@ -64,18 +64,12 @@
       </table>
     </div>
 
-    <script>
+    <!-- <script>
       const btn = document.getElementById("btn");
       const form = document.getElementById("form");
       const input = document.getElementById("input");
       const tbody = document.querySelector("tbody");
       const result = document.getElementById("result");
-
-      $(document).ready(function () {
-        $("button").click(function () {
-          $("p").hide();
-        });
-      });
 
       const celcius = document.getElementById("celciusResult");
       const fahrenheit = document.getElementById("fahrenheitResult");
@@ -90,30 +84,42 @@
       }
 
       function itemPlus(celcius, fahrenheit, reamure, kelvin) {
-        const contentBody = document.createElement("tr");
-        result.appendChild(contentBody);
+        // $(document).ready(function () {
+        //   $("button").click(function () {
+        //     $("p").hide();
+        //   });
+        // });
 
-        const celciusTd = document.createElement("td");
-        const fahrenheitTd = document.createElement("td");
-        const reamureTd = document.createElement("td");
-        const kelvinTd = document.createElement("td");
+        $(document).ready(function () {
+          // const contentBody = document.createElement("tr");
+          const contentBody = $("<tr></tr>")
+          $("#result").appendChild(contentBody);
 
-        celciusTd.textContent = celcius;
-        fahrenheitTd.textContent = fahrenheit;
-        reamureTd.textContent = reamure;
-        kelvinTd.textContent = kelvin;
+          // const celciusTd = document.createElement("td");
+          // const fahrenheitTd = document.createElement("td");
+          // const reamureTd = document.createElement("td");
+          // const kelvinTd = document.createElement("td");
+          const celciusTd = $("<td></td>").text(celcius);
+          const fahrenheitTd = $("<td></td>").text(fahrenheit);
+          const reamureTd = $("<td></td>").text(reamure);
+          const kelvinTd = $("<td></td>").text(kelvin);
 
-        contentBody.appendChild(celciusTd);
-        contentBody.appendChild(fahrenheitTd);
-        contentBody.appendChild(reamureTd);
-        contentBody.appendChild(kelvinTd);
+          // celciusTd.textContent = celcius;
+          // fahrenheitTd.textContent = fahrenheit;
+          // reamureTd.textContent = reamure;
+          // kelvinTd.textContent = kelvin;
+
+          contentBody.appendChild(celciusTd);
+          contentBody.appendChild(fahrenheitTd);
+          contentBody.appendChild(reamureTd);
+          contentBody.appendChild(kelvinTd);
+        });
       }
 
       loadData();
 
       $(document).ready(function () {
         $("#form").submit(function () {
-          // e.preventDefault();
           const celciusValue = Math.floor(input.value);
           const fahrenheitValue = Math.floor((celciusValue * 9) / 5 + 32);
           const reamureValue = Math.floor(celciusValue * (4 / 5));
@@ -136,7 +142,7 @@
           localStorage.setItem("key", JSON.stringify(data));
           itemPlus(celciusValue, fahrenheitValue, reamureValue, kelvinValue);
 
-          input.value = "";
+          input.val() = "";
         });
       });
 
@@ -168,6 +174,52 @@
       // });
 
       itemPlus();
+    </script> -->
+
+    <script>
+      $(document).ready(function () {
+        function loadData() {
+          const storageKey = JSON.parse(localStorage.getItem("key")) || [];
+          storageKey.forEach((item) =>
+            itemPlus(item.celcius, item.fahrenheit, item.reamure, item.kelvin),
+          );
+        }
+
+        function itemPlus(celcius, fahrenheit, reamure, kelvin) {
+          const contentBody = $("<tr></tr>");
+          $("tbody").append(contentBody);
+
+          const celciusValue = Math.floor($("#input").val());
+          const fahrenheitValue = Math.floor((celciusValue * 9) / 5 + 32);
+          const reamureValue = Math.floor(celciusValue * (4 / 5));
+          const kelvinValue = Math.floor(celciusValue + 273);
+
+          // contentBody.appendChild(celciusTd);
+          // contentBody.appendChild(fahrenheitTd);
+          // contentBody.appendChild(reamureTd);
+          // contentBody.appendChild(kelvinTd);
+
+          const celciusTd = $("<td></td>").text(celciusValue);
+          const fahrenheitTd = $("<td></td>").text(fahrenheitValue);
+          const reamureTd = $("<td></td>").text(reamureValue);
+          const kelvinTd = $("<td></td>").text(kelvinValue);
+
+          contentBody.append(celciusTd)
+          contentBody.append(fahrenheitTd)
+          contentBody.append(reamureTd)
+          contentBody.append(kelvinTd)
+
+          // contentBody.append(celciusValue, fahrenheitValue, reamureValue, kelvinValue)
+          // contentBody.append(celciusValue, fahrenheitValue, reamureValue, kelvinValue)
+          // contentBody.append(celciusValue, fahrenheitValue, reamureValue, kelvinValue)
+          // contentBody.append(celciusValue, fahrenheitValue, reamureValue, kelvinValue)
+
+          console.log(celciusValue);
+        }
+        itemPlus()
+
+        // $("#form").submit()
+      });
     </script>
   </body>
 </html>

@@ -59,9 +59,7 @@
             <td>Kelvin</td>
           </tr>
         </thead>
-        <tbody align="center">
-          <tr id="result">
-          </tr>
+        <tbody align="center" id="result">
         </tbody>
       </table>
     </div>
@@ -79,7 +77,9 @@
       const kelvin = document.getElementById("kelvinResult");
 
       let data = []
-      
+      window.localStorage.setItem("key", JSON.stringify(data))
+      const res = localStorage.getItem("key")
+      console.log(res);
 
       form.addEventListener("submit", e => {
         e.preventDefault()
@@ -89,20 +89,31 @@
         const reamureValue = Math.floor(celciusValue * (4 / 5))
         const kelvinValue = Math.floor(celciusValue + 273)
 
+        const contentBody = document.createElement("tr")
+        result.appendChild(contentBody)
+
+        const celciusTd = document.createElement("td")
         const fahrenheitTd = document.createElement("td")
         const reamureTd = document.createElement("td")
         const kelvinTd = document.createElement("td")
 
+        celciusTd.textContent = celciusValue
         fahrenheitTd.textContent = fahrenheitValue
+        reamureTd.textContent = reamureValue
+        kelvinTd.textContent = kelvinValue
+        contentBody.appendChild(celciusTd)
+        contentBody.appendChild(fahrenheitTd)
+        contentBody.appendChild(reamureTd)
+        contentBody.appendChild(kelvinTd)
 
-        result.appendChild(fahrenheitTd)
-
+        
         // console.log(fahrenheitValue);
         // console.log(reamureValue);
         // console.log(kelvinValue);
         
       })
-
+      
+      
 
     </script>
   </body>

@@ -75,10 +75,9 @@
       const reamure = document.getElementById("reamureResult");
       const kelvin = document.getElementById("kelvinResult");
 
-      let data = [];
-      // window.localStorage.setItem("key", JSON.stringify(data))
-      // const res = localStorage.getItem("key")
-      // console.log(res);
+      function loadData() {
+        const abc = JSON.parse(localStorage.getItem("key")) || [];
+      }
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -98,32 +97,32 @@
 
         const hasil = [
           {
-            celciusValue,
+            celcius: celciusValue,
             fahrenheit: fahrenheitValue,
             reamure: reamureValue,
             kelvin: kelvinValue,
           },
         ];
-        window.localStorage.setItem("key", JSON.stringify(hasil));
+        localStorage.setItem("key", JSON.stringify(hasil));
+        const abc = JSON.parse(localStorage.getItem("key")) || [];
+        abc.push(hasil);
+        localStorage.setItem("key", JSON.stringify(abc));
+        console.log(abc);
 
-        // console.log(hasil);
-        // console.log(hasil.celciusValue);
-        // console.log(hasil.fahrenheit);
-        // console.log(hasil.reamure);
-        // console.log(hasil.kelvin);
-
-        celciusTd.textContent = hasil.celciusValue;
+        celciusTd.textContent = celciusValue;
         fahrenheitTd.textContent = fahrenheitValue;
         reamureTd.textContent = reamureValue;
         kelvinTd.textContent = kelvinValue;
+
         contentBody.appendChild(celciusTd);
         contentBody.appendChild(fahrenheitTd);
         contentBody.appendChild(reamureTd);
         contentBody.appendChild(kelvinTd);
 
-        // console.log(fahrenheitValue);
-        // console.log(reamureValue);
-        // console.log(kelvinValue);
+        // add data
+        // function addData() {
+        //   itemsArray.push(hasil.celciusValue);
+        // }
       });
     </script>
   </body>

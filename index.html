@@ -43,6 +43,7 @@
         border-bottom: 1px solid red;
       }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -77,10 +78,9 @@
 
       function loadData() {
         const storageKey = JSON.parse(localStorage.getItem("key")) || [];
-        // console.log(storageKey);
-        storageKey.forEach((item) => {
-          // console.log(item);
-        });
+        storageKey.forEach((item) =>
+          itemPlus(item.celcius, item.fahrenheit, item.reamure, item.kelvin),
+        );
       }
 
       function itemPlus(celcius, fahrenheit, reamure, kelvin) {
@@ -101,14 +101,9 @@
         contentBody.appendChild(fahrenheitTd);
         contentBody.appendChild(reamureTd);
         contentBody.appendChild(kelvinTd);
-
       }
 
       loadData();
-
-      // let data = []
-      // console.log(data);
-      
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -129,41 +124,15 @@
           kelvin: kelvinValue,
         };
 
-        // console.log(result.celcius);
-
-        const data = JSON.parse(localStorage.getItem("key")) || []
-        // console.log(data);
+        const data = JSON.parse(localStorage.getItem("key")) || [];
         data.push(result);
         localStorage.setItem("key", JSON.stringify(data));
         itemPlus(celciusValue, fahrenheitValue, reamureValue, kelvinValue);
 
-        // data.push(result)
-        // localStorage.setItem("key", JSON.stringify(data));
-
-        // localStorage.setItem("key", JSON.stringify(hasil));
-        // const abc = JSON.parse(localStorage.getItem("key")) || [];
-        // abc.push(hasil);
-        // localStorage.setItem("key", JSON.stringify(abc));
-        // console.log(abc);
-
-        // celciusTd.textContent = celciusValue;
-        // fahrenheitTd.textContent = fahrenheitValue;
-        // reamureTd.textContent = reamureValue;
-        // kelvinTd.textContent = kelvinValue;
-
-        // contentBody.appendChild(celciusTd);
-        // contentBody.appendChild(fahrenheitTd);
-        // contentBody.appendChild(reamureTd);
-        // contentBody.appendChild(kelvinTd);
-
-        // add data
-        // function addData() {
-        //   itemsArray.push(hasil.celciusValue);
-        // }
         input.value = "";
       });
 
-      itemPlus()
+      itemPlus();
     </script>
   </body>
 </html>

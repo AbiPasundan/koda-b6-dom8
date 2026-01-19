@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -39,6 +39,8 @@
       }
       td {
         width: 100px;
+        border-right: 1px solid red;
+        border-bottom: 1px solid red;
       }
     </style>
   </head>
@@ -50,12 +52,6 @@
       </form>
       <table>
         <thead>
-          <style>
-            td {
-              border-right: 1px solid red;
-              border-bottom: 1px solid red;
-            }
-          </style>
           <tr align="center">
             <td>Celcius</td>
             <td>Fahrenheit</td>
@@ -64,11 +60,7 @@
           </tr>
         </thead>
         <tbody align="center">
-          <tr>
-            <td id="celciusResult"></td>
-            <td id="fahrenheitResult"></td>
-            <td id="reamureResult"></td>
-            <td id="kelvinResult"></td>
+          <tr id="result">
           </tr>
         </tbody>
       </table>
@@ -78,88 +70,40 @@
       const btn = document.getElementById("btn");
       const form = document.getElementById("form");
       const input = document.getElementById("input");
+      const tbody = document.querySelector("tbody");
+      const result = document.getElementById("result");
+
       const celcius = document.getElementById("celciusResult");
       const fahrenheit = document.getElementById("fahrenheitResult");
       const reamure = document.getElementById("reamureResult");
       const kelvin = document.getElementById("kelvinResult");
-      const tbody = document.querySelector("tbody");
-      const counterId = document.getElementById("counterId");
-      console.log(counterId);
+
+      let data = []
       
 
-      const calc = (e) => {
-        event.preventDefault();
-        let firstValCelcius = parseFloat(input.value);
-        // console.log(firstValCelcius);
+      form.addEventListener("submit", e => {
+        e.preventDefault()
+        const celciusValue = input.value
 
-        if (isNaN(firstValCelcius)) {
-          console.log("baleg sia ");
-          return;
-        }
+        const fahrenheitValue = Math.floor((celciusValue * 9) / 5 + 32);
+        const reamureValue = Math.floor(celciusValue * (4 / 5))
+        const kelvinValue = Math.floor(celciusValue + 273)
 
-        celcius.textContent = firstValCelcius;
-        fahrenheit.textContent = (firstValCelcius * 9) / 5 + 32;
-        reamure.textContent = firstValCelcius * (4 / 5);
-        kelvin.textContent = firstValCelcius + 273;
+        const fahrenheitTd = document.createElement("td")
+        const reamureTd = document.createElement("td")
+        const kelvinTd = document.createElement("td")
 
-        let templates = "";
+        fahrenheitTd.textContent = fahrenheitValue
 
-        const newRow = document.createElement("tr")
-        tbody.appendChild(newRow);
+        result.appendChild(fahrenheitTd)
+
+        // console.log(fahrenheitValue);
+        // console.log(reamureValue);
+        // console.log(kelvinValue);
         
-        const tdCounter = document.createElement("td");
-        const tdCelcius = document.createElement("td");
-        const tdFahrenheit = document.createElement("td");
-        const tdReamure = document.createElement("td");
-        const tdKelvin = document.createElement("td");
+      })
 
-        tdCounter.textContent = firstValCelcius;
-        tdCelcius.textContent = firstValCelcius;
-        tdFahrenheit.textContent = (firstValCelcius * 9) / 5 
-        tdReamure.textContent = firstValCelcius * (4 / 5);
-        tdKelvin.textContent = firstValCelcius + 273;
 
-        let counterId = 1
-
-        
-        newRow.appendChild(tdCelcius);
-        newRow.appendChild(tdFahrenheit);
-        newRow.appendChild(tdReamure);
-        newRow.appendChild(tdKelvin);
-        templates += `
-            <tr>
-                <td>${tdCounter}</td>
-                <td>${tdCelcius}</td>
-                <td>${tdFahrenheit}</td>
-                <td>${tdReamure}</td>
-                <td>${tdKelvin}</td>
-            </tr>
-        `;
-
-      };
-
-      form.addEventListener("submit", calc);
-
-      //   btn.addEventListener("submit", (e) => {
-      //     e.preventDefault();
-      //     // let firstValCelcius = input.target.value;
-
-      //     // console.log(firstValCelcius);
-
-      //     // celcius.textContent = firstValCelcius;
-
-      //     let fahrenheitResulst = (firstValCelcius * 9) / 5 + 32;
-      //     fahrenheitResulst;
-      //     fahrenheit.textContent = fahrenheitResulst;
-
-      //     // let reamureResulst = (4 / 5) * firstValCelcius;
-      //     // fahrenheitResulst;
-      //     // reamure.textContent = reamureResulst;
-
-      //     // let kelvinResulst = firstValCelcius + 273;
-      //     // kelvinResulst;
-      //     // kelvin.textContent = kelvinResulst;
-      //   });
     </script>
   </body>
 </html>
